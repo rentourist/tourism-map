@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Provider Details</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  .provider-details {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  h2 {
+    margin-top: 0;
+  }
+</style>
+</head>
+<body>
+  <div class="provider-details">
+    <h2 id="provider-name">Provider Name</h2>
+    <p id="provider-description">Description: </p>
+    <p id="provider-activity">Activity: </p>
+    <p id="provider-product">Product: </p>
+  </div>
+
+<script>
+  // URL of the published Google Sheet in CSV format
+  var sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS0FQT0wlhjdEp306XgRO5LAW7XexeTYP_Vh8X3uJuusZ2-SR1ZB7Jd0MZCZBaHOGN07cV6ev7aU4kK/pub?output=csv';
+
+  // Function to fetch and parse CSV data
+  function fetchCSV(url) {
+    fetch(url)
+      .then(response => response.text())
+      .then(csvText => {
+        parseCSV(csvText);
+      });
+  }
+
+  // Function to parse CSV and find the provider by name
+  function parseCSV(csvText) {
+    var rows = csvText.split('\n').slice(1);
+    var providerName = decodeURIComponent(new URLSearchParams(window.location.search).get('name'));
+
+    rows.forEach(row => {
+      var cols = row.split(',');
+      var name = cols[0];
+      var description = cols[3];
+      var activity = cols[4];
+      var product = cols[5];
+
+      if (name === providerName) {
+        document.getElementById('provider-name').textContent = name;
+        document.getElementById('provider-description').textContent = 'Description: ' + description;
+        document.getElementById('provider-activity').textContent = 'Activity: ' + activity;
+        document.getElementById('provider-product').textContent = 'Product: ' + product;
+      }
+    });
+  }
+
+  // Fetch data and find the provider
+  fetchCSV(sheetURL);
+</script>
+</body>
+</html>
