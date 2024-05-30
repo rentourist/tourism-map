@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home Page</title>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+  }
+  #search-form {
+    display: flex;
+  }
+  .search-bar {
+    padding: 10px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  #search-button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+</style>
+</head>
+<body>
+  <form id="search-form" action="marketplace.html" method="get">
+    <input type="text" id="search-city" name="city" class="search-bar" placeholder="Search by city" />
+    <input type="text" id="search-activity" name="activity" class="search-bar" placeholder="Search by product/activity" />
+    <button type="submit" id="search-button">Buscar</button>
+  </form>
+</body>
+</html>
